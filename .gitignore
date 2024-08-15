@@ -1,2 +1,36 @@
-
+# Ignore temporary and system files
 .DS_Store
+
+# Ignore none code files
+.xlsx
+.zip
+.pptx
+.csv
+
+# Ignore directories
+tmp/
+
+# Ignore node_modules (if using Node.js)
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore OS-generated files
+Thumbs.db
+*.swp
+*.swo
+
+# Ignore IDE/editor-specific files
+.vscode/
+.idea/
+*.iml
+
+# Ignore compiled files and directories
+dist/
+build/
+out/
+
+# Ignore environment variables and secrets
+.env
+.env.local
