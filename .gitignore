@@ -1,7 +1,7 @@
 # Ignore temporary and system files
 .DS_Store
 
-# Ignore none code files
+# Ignore file types
 
 # Ignore directories
 /.obsidian
