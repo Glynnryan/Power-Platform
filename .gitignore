@@ -2,13 +2,8 @@
 .DS_Store
 
 # Ignore none code files
-.xlsx
-.zip
-.pptx
-.csv
 
 # Ignore directories
-tmp/
 
 # Ignore node_modules (if using Node.js)
 node_modules/
