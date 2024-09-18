@@ -33,7 +33,7 @@ To get started with the Power Platform, check out the following resources:
 
 | Name                                | Description               |
 | ----------------------------------- | ------------------------- |
-| [Power Automate](.Power%20Automate) | Everything Power Automate |
+| [Power Automate](/Power%20Automate) | Everything Power Automate |
 
 ## Quick Links
 
