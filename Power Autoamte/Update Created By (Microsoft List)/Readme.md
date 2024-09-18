@@ -88,13 +88,13 @@ _api/web/lists/getbytitle('@{triggerBody()?'text'}')/items('@{triggerBody()?'num
 9. Save and **publish** your automation.
 10. Select **Back** at the top left corner of your screen to return to the automation's overview screen.
 11. **Edit** the **Run only users**
+ 	- Select the dropdown arrow below the **SharePoint** connection.
+  	- Select a connection to use.
+   	- Select **Save**
 > [!TIP]
 > This is to ensure that the autoamtion can be run when using the "Run a child flow" action.
 
 > [!NOTE]
 > By default the SharePoint connection will be "Provided by run-only user"
-
- 	- Select the dropdown arrow below the **SharePoint** connection
-  	- Select a connection to use.
 
 And that’s it! Now, whenever you need to update the “Created By” field in a Microsoft List item, use the **Run a Child Flow** action, select this automation, and input your dynamic content into the fields you set up in step 5.
