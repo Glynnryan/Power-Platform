@@ -6,6 +6,14 @@ This Power Automate flow updates the “Created By” field of a Microsoft List 
 
 ![Overview](assets/Overview.jpg)
 
+## Introduction
+
+I have several Power Automate flows that create items in various Microsoft Lists within the same SharePoint site using a service account. As a result, these list items have a "Created By" value that reflects the service account's name.
+
+While this is acceptable in some instances, there are cases where I need a specific individual to appear as the author of the item. For example, when a Microsoft Form triggers my flow, I may want the list item to reflect the form responder as the list item author.
+
+This Power Automate flow updates the “Created By” field in Microsoft Lists, replacing the default account with a specified user based on their email address, using an HTTP request to SharePoint.
+
 ## Applies to
 
 ![Power Automate](https://img.shields.io/badge/Power%20Automate-Yes-green "Yes")
@@ -13,7 +21,6 @@ This Power Automate flow updates the “Created By” field of a Microsoft List 
 ## Compatibility
 
 ![Premium License](https://img.shields.io/badge/Premium%20License-Not%20Required-red.svg "Premium license not required") ![Experimental Features](https://img.shields.io/badge/Experimental%20Features-No-red.svg "Does not rely on experimental features")
-
 
 ## Version history
 
@@ -145,14 +152,6 @@ You can also use the [Power Apps CLI](https://docs.microsoft.com/powerapps/devel
 
   Making sure to replace `pathtosourcefolder` to point to the path to this sample's `sourcecode` folder, and `pathtodestinationfile` to point to the path of this solution's `.zip` file (located under the `solution` folder)
 * Within **Power Apps Studio**, import the solution `.zip` file using **Solutions** > **Import Solution** and select the `.zip` file you just packed.
-
-## Features
-
-I have several Power Automate flows that create items in various Microsoft Lists within the same SharePoint site using a service account. As a result, these list items have a "Created By" value that reflects the service account's name.
-
-While this is acceptable in some instances, there are cases where I need a specific individual to appear as the author of the item. For example, when a Microsoft Form triggers my flow, I may want the list item to reflect the form responder as the list item author.
-
-This Power Automate flow updates the “Created By” field in Microsoft Lists, replacing the default account with a specified user based on their email address, using an HTTP request to SharePoint.
 
 
 ## Post Script
