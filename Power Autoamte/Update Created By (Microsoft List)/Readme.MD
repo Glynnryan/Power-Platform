@@ -7,8 +7,7 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 
 # Solution
 
-![Solution Overview](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Overview.png?raw=true)
-
+![Solution Overview](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Overview.jpg?raw=true)
 > [!NOTE] 
 > My solution uses a flow created within a Solution in Power Automate. You can still achieve the end goal by following the steps below in a dedicated flow. However, if you're not using solutions, I would recommend starting to do so, as there are several benefits, such as running a child flow.  
 > For more information on Solutions, you can click [here](https://learn.microsoft.com/en-us/power-automate/overview-solution-flows).
@@ -19,10 +18,15 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 3. Choose the solution where you want to create the automation, or [create a new solution](https://learn.microsoft.com/en-us/power-automate/overview-solution-flows).
 4. Create a new automation:
     - In the top menu, select **New** > **Automation** > **Cloud Flow** > **Instant**.
+![Step 4a](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Step%204a.jpg?raw=true)
     - Enter a **Flow name**. (I called mine "Update Created By". Original, right? 🤓)
     - Select **Manually trigger a flow** as the trigger.
     - Select **Create**.
+![Step 4b](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Step%204b.jpg?raw=true)
+
 5. Select **Manually trigger a flow** and add the following inputs:
+
+![Step 5](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Step%205.jpg?raw=true)
 
 |  Type  |       Name       |                 Description                  |
 | ------ | ---------------- | -------------------------------------------- |
@@ -32,10 +36,14 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 |  Text  |   Site Address   |            Site address of the list          |
 
 6. Add a **Send an HTTP request to SharePoint** action.
+
+![Step 6](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Step%206.jpg?raw=true)
 > [!TIP] 
 > You can search for "HTTP" in the search box to find this action quickly.
 
 7. Configure the action as follows:
+
+![Step 7](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Step%207.jpg?raw=true)
 
 ### Site Address
 Select the **Site Address** dynamic content created in step 5, or enter the relevant SharePoint site address.
@@ -69,6 +77,8 @@ _api/web/lists/getbytitle('@{triggerBody()?'text'}')/items('@{triggerBody()?'num
 > If you've followed the exact sequence in step 5, you can use the provided JSON without modification. Otherwise, adjust as needed.
 
 8. Add a **Respond to a Power App or flow** action.
+
+![Step 8](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Step%208.jpg?raw=true)
 > [!TIP]
 > Add an **Output**, with the **Type** of **Text** and **Value** of "Complete" to parse this status back to your previous flow.
 
