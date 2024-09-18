@@ -41,8 +41,6 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 6. Add a **Send an HTTP request to SharePoint** action.
 
 ![Step 6](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Step%206.jpg?raw=true)
-> [!TIP] 
-> You can search for "HTTP" in the search box to find this action quickly.
 
 7. Configure the action as follows:
 
