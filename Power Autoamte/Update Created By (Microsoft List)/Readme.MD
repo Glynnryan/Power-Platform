@@ -7,7 +7,7 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 
 # Solution
 
-> **NOTE:**  
+> [!NOTE] 
 > My solution uses a flow created within a Solution in Power Automate. You can still achieve the end goal by following the steps below in a dedicated flow. However, if you're not using solutions, I would recommend starting to do so, as there are several benefits, such as running a child flow.  
 > For more information on Solutions, you can click [here](https://learn.microsoft.com/en-us/power-automate/overview-solution-flows).
 
@@ -29,7 +29,7 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 |  Text  | Created By Email | Email address of the person to set as Author |
 
 6. Add a **Send an HTTP request to SharePoint** action.
-> **TIP:**  
+> [!TIP] 
 > You can search for "HTTP" in the search box to find this action more quickly.
 
 7. Configure the action as follows:
@@ -42,14 +42,14 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 | Body<sup>**2**</sup>         | ```json<br>{<br>	"formValues":[<br>		{<br>			"FieldName": "Author",<br>			"FieldValue": "[{'Key':'i:0#.f\|membership\|@{triggerBody()?['text_1']}'}]"<br>		}<br>	]<br>}<br>``` |
 |                              |                                                                                                                                                                                |
 
-> **TIP:**  
+> [!TIP] 
 > <sup>1</sup> If you want this to work dynamically across multiple SharePoint sites, add a Text input to your trigger with a descriptive name, like "Site Address", and use that input when running the flow.
 
-> **NOTE:**  
+> [!NOTE]
 > <sup>2</sup> If you've followed the exact sequence in step 5, you should be able to use the provided values without modification. Otherwise, adjust them as needed.
 
 8. Add a **Respond to a Power App or flow** action.
-> [!OPTIONAL]
+> [!TIP]
 > Add an **Output**, with the **Type** of **Text** and **Value** of "Complete" to parse this status back to your previous flow.
 
 And that’s it! Now, whenever you need to update the “Created By” field in a Microsoft List item, use the **Run a Child Flow** action, select this automation, and input your dynamic content into the fields you set up in step 5.
