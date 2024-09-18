@@ -30,7 +30,7 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 
 6. Add a **Send an HTTP request to SharePoint** action.
 > [!TIP] 
-> You can search for "HTTP" in the search box to find this action more quickly.
+> You can search for "HTTP" in the search box to find this action quickly.
 
 7. Configure the action as follows:
 
