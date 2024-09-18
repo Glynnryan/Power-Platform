@@ -67,14 +67,7 @@ _api/web/lists/getbytitle('@{triggerBody()?'text'}')/items('@{triggerBody()?'num
 **Body**
 
 ``` JSON
-{
-	"formValues":[
-		{
-			"FieldName": "Author",
-			"FieldValue": "[{'Key':'i:0#.f|membership|@{triggerBody()?['text_1']}'}]"
-		}
-	]
-}
+./sourcecode/Body%20-%20Complete.json
 ```
 > [!NOTE]
 > If you've followed the exact sequence in step 5, you can use the provided JSON without modification. Otherwise, adjust as needed.
