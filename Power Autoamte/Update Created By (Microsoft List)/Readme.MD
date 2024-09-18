@@ -39,7 +39,15 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 | Site Address<sup>**1**</sup> | Select or enter the relevant SharePoint site address                                                                                                                           |
 | Method                       | Post                                                                                                                                                                           |
 | Uri<sup>**2**</sup>          | `_api/web/lists/getbytitle('@{triggerBody()?['text']}')/items('@{triggerBody()?['number']}')/validateUpdateListItem`                                                           |
-| Body<sup>**2**</sup>         | ```json<br>{<br>	"formValues":[<br>		{<br>			"FieldName": "Author",<br>			"FieldValue": "[{'Key':'i:0#.f\|membership\|@{triggerBody()?['text_1']}'}]"<br>		}<br>	]<br>}<br>``` |
+| Body<sup>**2**</sup>         | ```json{
+	"formValues":[
+		{
+			"FieldName": "Author",
+			"FieldValue": "[{'Key':'i:0#.f|membership|@{triggerBody()?['text_1']}'}]"
+		}
+	]
+}
+``` |
 |                              |                                                                                                                                                                                |
 
 > [!TIP] 
