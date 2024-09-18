@@ -17,12 +17,15 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 2. In the left-hand menu, select **Solutions**.
 3. Choose the solution where you want to create the automation, or [create a new solution](https://learn.microsoft.com/en-us/power-automate/overview-solution-flows).
 4. Create a new automation:
-- In the top menu, select **New** > **Automation** > **Cloud Flow** > **Instant**.
-![Step 4a](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Step%204a.jpg?raw=true)
-- Enter a **Flow name**. (I called mine "Update Created By". Original, right? 🤓)
-- Select **Manually trigger a flow** as the trigger.
-- Select **Create**.
-![Step 4b](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Step%204b.jpg?raw=true)
+	- In the top menu, select **New** > **Automation** > **Cloud Flow** > **Instant**.
+	
+	![Step 4a](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Step%204a.jpg?raw=true)
+	
+	- Enter a **Flow name**. (I called mine "Update Created By". Original, right? 🤓)
+	- Select **Manually trigger a flow** as the trigger.
+	- Select **Create**.
+
+	![Step 4b](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Step%204b.jpg?raw=true)
 
 5. Select **Manually trigger a flow** and add the following inputs:
 
