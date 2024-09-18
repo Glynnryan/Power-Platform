@@ -27,7 +27,8 @@ This Power Automate flow updates the “Created By” field of a Microsoft List 
 | 1.0.0.0 | September 18, 2024 | Initial release |
 
 ## Prerequisites
-- **Microsoft Lists*
+
+- **Microsoft Lists**
   - A configured Microsoft List
 
 ## Minimal path to awesome
@@ -44,11 +45,14 @@ This Power Automate flow updates the “Created By” field of a Microsoft List 
 3. Choose the solution where you want to create the automation, or [create a new solution](https://learn.microsoft.com/en-us/power-automate/overview-solution-flows).
 4. Create a new automation:
   - In the top menu, select **New** > **Automation** > **Cloud Flow** > **Instant**.
-![Step 4a](assets/Step%204a.jpg)
-- Enter a **Flow name**. (I called mine "Update Created By". Original, right? 🤓)
-- Select **Manually trigger a flow** as the trigger.
-- Select **Create**.
-![Step 4b](assets/Step%204a.jpg)
+
+    ![Step 4a](assets/Step%204a.jpg)
+
+  - Enter a **Flow name**. (I called mine "Update Created By". Original, right? 🤓)
+  - Select **Manually trigger a flow** as the trigger.
+  - Select **Create**.
+
+    ![Step 4b](assets/Step%204a.jpg)
 
 5. Select **Manually trigger a flow** and add the following inputs:
 
@@ -59,73 +63,104 @@ This Power Automate flow updates the “Created By” field of a Microsoft List 
 |  Text  | Created By Email | Email address of the person to set as Author |
 |  Text  |   Site Address   |            Site address of the list          |
 
-![Step 5](assets/Step%205.jpg)
+  ![Step 5](assets/Step%205.jpg)
 
 6. Add a **Send an HTTP request to SharePoint** action.
 
-![Step 6](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Step%206.jpg?raw=true)
+  ![Step 6](assets/Step%206.jpg)
+
 > [!TIP] 
 > You can search for "HTTP" in the search box to find this action quickly.
 
 7. Configure the action as follows:
+- **Site Address**
+    Select the **Site Address** dynamic content created in step 5, or enter the relevant SharePoint site address.
 
-![Step 7](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Step%207.jpg?raw=true)
+  > [!TIP] 
+  > If you want this automation to work dynamically across multiple SharePoint sites, add the **Site Address** at step 5. Alternatively, you can set this as a fixed value if your use case means the SharePoint site will not change.
 
-### Site Address
-Select the **Site Address** dynamic content created in step 5, or enter the relevant SharePoint site address.
-> [!TIP] 
-> If you want this automation to work dynamically across multiple SharePoint sites, add the **Site Address** at step 5. Alternatively, you can set this as a fixed value if your use case means the SharePoint site will not change.
+- **Method**
+    Post
 
-### Method
-Post
-
-### Uri
-
-``` HTML
-_api/web/lists/getbytitle('@{triggerBody()?'text'}')/items('@{triggerBody()?'number'}')/validateUpdateListItem
+- **Uri**
+    ``` HTML
+    _api/web/lists/getbytitle('@{triggerBody()?'text'}')/items('@{triggerBody()?'number'}')/validateUpdateListItem
 ```
-> [!NOTE]
-> If you've followed the exact sequence in step 5, you can use the provided Uri without modification. Otherwise, adjust as needed.
 
-### Body
 
-``` JSON
-{
-  "formValues":[
+
+**Uri**
+
+
+  ``` HTML
+  _api/web/lists/getbytitle('@{triggerBody()?'text'}')/items('@{triggerBody()?'number'}')/validateUpdateListItem
+  ```
+  **File:** [Uri-Sample.html](sourcecode/Uri-Sample.html)
+
+  > [!NOTE]
+  > If you've followed the exact sequence in step 5, you can use the provided Uri without modification. Otherwise, adjust as needed.
+
+  ``` HTML
+  _api/web/lists/getbytitle('List Name')/items('ID')/validateUpdateListItem
+  ```
+  **File:** [Uri.html](sourcecode/Uri.html)
+
+  - **Body**
+
+    ``` JSON
     {
-      "FieldName": "Author",
-      "FieldValue": "[{'Key':'i:0#.f|membership|@{triggerBody()?['text_1']}'}]"
+      "formValues":[
+        {
+          "FieldName": "Author",
+          "FieldValue": "[{'Key':'i:0#.f|membership|@{triggerBody()?['text_1']}'}]"
+        }
+      ]
     }
-  ]
-}
-```
-> [!NOTE]
-> If you've followed the exact sequence in step 5, you can use the provided JSON without modification. Otherwise, adjust as needed.
+    ```
+    
+      **File:** [Body-Sample.json](sourcecode/Body-Sample.json)
+
+  > [!NOTE]
+  > If you've followed the exact sequence in step 5, you can use the provided JSON without modification. Otherwise, adjust as needed.
+
+    ``` JSON
+    {
+      "formValues":[
+        {
+          "FieldName": "Author",
+          "FieldValue": "[{'Key':'i:0#.f|membership|user@example.com'}]"
+        }
+      ]
+    }
+    ```
+    
+      **File:** [Body.json](sourcecode/Body.json)
+
+  ![Step 7](assets/Step%207.jpg)
 
 8. Add a **Respond to a Power App or flow** action.
 
-![Step 8](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Step%208.jpg?raw=true)
-> [!TIP]
-> Add an **Output**, with the **Type** of **Text** and **Value** of "Complete" to parse this status back to your previous flow.
+  ![Step 8](assets/Step%208.jpg)
+
+  > [!TIP]
+  > Add an **Output**, with the **Type** of **Text** and **Value** of "Complete" to parse this status back to your previous flow.
+
+9. Save and **publish** your automation.
+10. Select **Back** at the top left corner of your screen to return to the automation's overview screen.
+11. **Edit** the **Run only users**
+  - Select the dropdown arrow below the **SharePoint** connection.
+    - Select a connection to use.
+    - Select **Save**
+
+  > [!IMPORTANT]
+  > This is to ensure that the autoamtion can be run when using the "Run a child flow" action.
 
 And that’s it! Now, whenever you need to update the “Created By” field in a Microsoft List item, use the **Run a Child Flow** action, select this automation, and input your dynamic content into the fields you set up in step 5.
 
-<!-- 
-PRO TIP:
-
-For commands, use the `code syntax`
-
-For button labels, page names, dialog names, etc. as they appear on the screen, use **Bold**
-
-Don't use "click", use "select" or "use"
-
-As tempting as it may be, don't just use images to describe the steps. Let's be as inclusive as possible and think about accessibility.
-
--->
 
 ### Using the solution zip
 
-* [Download](./solution/UpdateCreatedBy_1_0_0_0.zip) the `.zip` from the `solution` folder
+* [Download](./solution/UpdateCreatedBy_1_0_0_1.zip) the `.zip` from the `solution` folder
 * Within **Power Apps Studio**, import the solution `.zip` file using **Solutions** > **Import Solution** and select the `.zip` file you just packed.
 * Open the app in edit mode and make sure the data source **Data source name** is connected correctly.
 
@@ -150,6 +185,7 @@ I have several Power Automate flows that create items in various Microsoft Lists
 While this is acceptable in some instances, there are cases where I need a specific individual to appear as the author of the item. For example, when a Microsoft Form triggers my flow, I may want the list item to reflect the form responder as the list item author.
 
 This Power Automate flow updates the “Created By” field in Microsoft Lists, replacing the default account with a specified user based on their email address, using an HTTP request to SharePoint.
+
 ## Help
 
 We do not support samples, but this community is always willing to help, and we want to improve these samples. We use GitHub to track issues, which makes it easy for  community members to volunteer their time and help resolve issues.
@@ -166,7 +202,8 @@ Finally, if you have an idea for improvement, [make a suggestion](https://github
 
 ## Post Script
 
-I found a Microsoft Community post titled "[Update 'Created By' and 'Modified By' fields.](https://techcommunity.microsoft.com/t5/power-apps-and-power-automate-in/update-created-by-and-modified-by-fields/m-p/3672675/highlight/true#M6072)", with an answer by [Rob Elliott](https://techcommunity.microsoft.com/t5/user/viewprofilepage/user-id/174092#profile) which gave me the idea and framework for my solution.
+I stumbled onto a Microsoft Community post titled "[Update 'Created By' and 'Modified By' fields.](https://techcommunity.microsoft.com/t5/power-apps-and-power-automate-in/update-created-by-and-modified-by-fields/m-p/3672675/highlight/true#M6072)", with an answer by [Rob Elliott](https://techcommunity.microsoft.com/t5/user/viewprofilepage/user-id/174092#profile) which gave me the idea and framework for my solution.
+
 ### Acknowledgements
 - [Rob Elliott](https://techcommunity.microsoft.com/t5/user/viewprofilepage/user-id/174092#profile)
 
