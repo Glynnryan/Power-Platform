@@ -1,8 +1,0 @@
-{
-	"formValues":[
-		{
-			"FieldName": "Author",
-			"FieldValue": "[{'Key':'i:0#.f|membership|@{triggerBody()?['text_1']}'}]"
-		}
-	]
-}

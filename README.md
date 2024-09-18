@@ -1,74 +1,210 @@
-# Power-Platform
+# Update "Created by" in a Microsoft List
 
-Welcome to the my Power Platform Repository! This repository is dedicated to providing tips, tricks, tutorials, and reference materials for all things related to the Microsoft Power Platform. My aim is to help anyone leverage the full potential of Power Platform tools such as Power BI, Power Automate and Power Apps, whilst also giving me a place ti store and save some of my own workings, solutions and use cases for future regerence.
+## Summary
 
-## Table of Contents
+This Power Automate flow updates the “Created By” field of a Microsoft List item, replacing the account with a specified user based on their email address, using an HTTP request to SharePoint.
 
-- [Introduction](#introduction)
-- [Getting Started](#getting-started)
-- [Tips and Tricks](#tips-and-tricks)
-- [Tutorials](#tutorials)
-- [Quick Links](#quick-links)
-- [Reference Material](#reference-material)
-- [Solutions and Workflows](#solutions-and-workflows)
-- [Contributing](#contributing)
-- [License](#license)
+![Overview](assets/Overview.jpg)
 
-## Introduction
+## Applies to
 
-The Microsoft Power Platform is a powerful suite of applications that allows you to automate processes, build solutions, analyse data, and create virtual agents. This repository is created to share knowledge and resources to help you get the most out of these tools.
+![Power Automate](https://img.shields.io/badge/Power%20Automate-Yes-green "Yes")
 
-## Getting Started
+## Compatibility
 
-To get started with the Power Platform, check out the following resources:
-- [Power Platform Overview](https://powerplatform.microsoft.com/)
-- [Getting Started with Power BI](https://docs.microsoft.com/en-us/power-bi/fundamentals/power-bi-overview)
-- [Getting Started with Power Automate](https://docs.microsoft.com/en-us/power-automate/getting-started)
-- [Getting Started with Power Apps](https://docs.microsoft.com/en-us/powerapps/powerapps-overview)
+![Premium License](https://img.shields.io/badge/Premium%20License-Not%20Required-red.svg "Premium license not required") ![Experimental Features](https://img.shields.io/badge/Experimental%20Features-No-red.svg "Does not rely on experimental features")
 
-## Tips and Tricks
+## Authors
 
-Here you will find a collection of useful tips and tricks to help you navigate and utilise the Power Platform more efficiently.
+| Solution                              | Author                                        |
+| ------------------------------------- | --------------------------------------------- |
+| Sharepoint - List - Update Created By | [Glynn Pearson](https://github.com/Glynnryan) |
 
-- [Tip 1: Optimising Power BI Reports](tips/optimising-power-bi-reports.md)
-- [Tip 2: Best Practices for Power Automate Flows](tips/best-practices-power-automate.md)
-- [Tip 3: Building Effective Power Apps](tips/building-effective-power-apps.md)
+## Version history
 
-## Tutorials
+| Version | Date               | Comments        |
+| ------- | ------------------ | --------------- |
+| 1.0.0.0 | September 18, 2024 | Initial release |
 
-Step-by-step tutorials to help you learn and master the Power Platform tools.
+## Prerequisites
 
-- [Automating Tasks with Power Automate](tutorials/automating-tasks-power-automate.md)
+- **Microsoft Lists**
+  - A configured Microsoft List
 
-## Quick Links
+## Minimal path to awesome
 
-A collection of quick links to important resources and documentation.
+> [!NOTE]
+> My solution uses a flow created within a Solution in Power Automate. You can still achieve the end goal by following the steps below in a dedicated flow. However, if you're not using solutions, I would recommend starting to do so, as there are several benefits, such as running a child flow.
 
-- [Power BI Documentation](https://docs.microsoft.com/en-us/power-bi/)
-- [Power Automate Documentation](https://docs.microsoft.com/en-us/power-automate/)
-- [Power Apps Documentation](https://docs.microsoft.com/en-us/powerapps/)
-- [Power Virtual Agents Documentation](https://docs.microsoft.com/en-us/power-virtual-agents/)
+> [!TIP]
+> For more information on Solutions, you can click [here](https://learn.microsoft.com/en-us/power-automate/overview-solution-flows).
 
-## Reference Material
+### Steps
+1. Sign in to [Power Automate](https://make.powerautomate.com/).
+2. In the left-hand menu, select **Solutions**.
+3. Choose the solution where you want to create the automation, or [create a new solution](https://learn.microsoft.com/en-us/power-automate/overview-solution-flows).
+4. Create a new automation:
+  - In the top menu, select **New** > **Automation** > **Cloud Flow** > **Instant**.
 
-Comprehensive reference material to deepen your understanding of Power Platform.
+    ![Step 4a](assets/Step%204a.jpg)
 
-- [Power Platform Licensing Guide](reference/power-platform-licensing-guide.md)
-- [Dataverse Documentation](https://docs.microsoft.com/en-us/powerapps/maker/data-platform/data-platform-intro)
-- [Power Platform Governance](reference/power-platform-governance.md)
+  - Enter a **Flow name**. (I called mine "Update Created By". Original, right? 🤓)
+  - Select **Manually trigger a flow** as the trigger.
+  - Select **Create**.
 
-## Solutions and Workflows
+    ![Step 4b](assets/Step%204a.jpg)
 
-Here you can find pre-built solutions and exported workflows that you can import into your own environment.
+5. Select **Manually trigger a flow** and add the following inputs:
 
-- [Solution 1: Sales Pipeline Automation](solutions/sales-pipeline-automation.zip)
-- [Solution 2: Asset Tracking System](solutions/asset-tracking-system.zip)
-- [Workflow 1: Approval Process Automation](workflows/approval-process-automation.zip)
+|  Type  |       Name       |                 Description                  |
+| ------ | ---------------- | -------------------------------------------- |
+|  Text  |    List Name     |          Name of the list to update          |
+| Number |     List ID      |            List item ID to update            |
+|  Text  | Created By Email | Email address of the person to set as Author |
+|  Text  |   Site Address   |            Site address of the list          |
 
-## Contributing
+  ![Step 5](assets/Step%205.jpg)
 
-I welcome contributions from the community! If you have tips, tricks, tutorials, or solutions to share, please submit a pull request. For major changes, please open an issue first to discuss what you would like to change.
+6. Add a **Send an HTTP request to SharePoint** action.
 
-## License
+  ![Step 6](assets/Step%206.jpg)
 
-This repository is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for more information.
+> [!TIP] 
+> You can search for "HTTP" in the search box to find this action quickly.
+
+7. Configure the action as follows:
+- **Site Address**
+    Select the **Site Address** dynamic content created in step 5, or enter the relevant SharePoint site address.
+
+  > [!TIP] 
+  > If you want this automation to work dynamically across multiple SharePoint sites, add the **Site Address** at step 5. Alternatively, you can set this as a fixed value if your use case means the SharePoint site will not change.
+
+- **Method**
+    Post
+
+- **Uri**
+    ``` HTML
+    _api/web/lists/getbytitle('@{triggerBody()?'text'}')/items('@{triggerBody()?'number'}')/validateUpdateListItem
+```
+
+
+
+**Uri**
+
+
+	``` HTML
+	_api/web/lists/getbytitle('@{triggerBody()?'text'}')/items('@{triggerBody()?'number'}')/validateUpdateListItem
+	```
+	**File:** [Uri-Sample.html](sourcecode/Uri-Sample.html)
+
+  > [!NOTE]
+  > If you've followed the exact sequence in step 5, you can use the provided Uri without modification. Otherwise, adjust as needed.
+
+	``` HTML
+	_api/web/lists/getbytitle('List Name')/items('ID')/validateUpdateListItem
+	```
+	**File:** [Uri.html](sourcecode/Uri.html)
+
+  - **Body**
+
+    ``` JSON
+    {
+      "formValues":[
+        {
+          "FieldName": "Author",
+          "FieldValue": "[{'Key':'i:0#.f|membership|@{triggerBody()?['text_1']}'}]"
+        }
+      ]
+    }
+    ```
+    
+      **File:** [Body-Sample.json](sourcecode/Body-Sample.json)
+
+  > [!NOTE]
+  > If you've followed the exact sequence in step 5, you can use the provided JSON without modification. Otherwise, adjust as needed.
+
+    ``` JSON
+    {
+      "formValues":[
+        {
+          "FieldName": "Author",
+          "FieldValue": "[{'Key':'i:0#.f|membership|user@example.com'}]"
+        }
+      ]
+    }
+    ```
+    
+      **File:** [Body.json](sourcecode/Body.json)
+
+  ![Step 7](assets/Step%207.jpg)
+
+8. Add a **Respond to a Power App or flow** action.
+
+  ![Step 8](assets/Step%208.jpg)
+
+  > [!TIP]
+  > Add an **Output**, with the **Type** of **Text** and **Value** of "Complete" to parse this status back to your previous flow.
+
+9. Save and **publish** your automation.
+10. Select **Back** at the top left corner of your screen to return to the automation's overview screen.
+11. **Edit** the **Run only users**
+  - Select the dropdown arrow below the **SharePoint** connection.
+    - Select a connection to use.
+    - Select **Save**
+
+  > [!IMPORTANT]
+  > This is to ensure that the autoamtion can be run when using the "Run a child flow" action.
+
+And that’s it! Now, whenever you need to update the “Created By” field in a Microsoft List item, use the **Run a Child Flow** action, select this automation, and input your dynamic content into the fields you set up in step 5.
+
+
+### Using the solution zip
+
+* [Download](./solution/UpdateCreatedBy_1_0_0_1.zip) the `.zip` from the `solution` folder
+* Within **Power Apps Studio**, import the solution `.zip` file using **Solutions** > **Import Solution** and select the `.zip` file you just packed.
+* Open the app in edit mode and make sure the data source **Data source name** is connected correctly.
+
+### Using the source code
+
+You can also use the [Power Apps CLI](https://docs.microsoft.com/powerapps/developer/data-platform/powerapps-cli) to pack the source code by following these steps:
+
+* Clone the repository to a local drive
+* Pack the source files back into a solution `.zip` file:
+
+  ```bash
+  pac solution pack --zipfile pathtodestinationfile --folder pathtosourcefolder --processCanvasApps
+  ```
+
+  Making sure to replace `pathtosourcefolder` to point to the path to this sample's `sourcecode` folder, and `pathtodestinationfile` to point to the path of this solution's `.zip` file (located under the `solution` folder)
+* Within **Power Apps Studio**, import the solution `.zip` file using **Solutions** > **Import Solution** and select the `.zip` file you just packed.
+
+## Features
+
+I have several Power Automate flows that create items in various Microsoft Lists within the same SharePoint site using a service account. As a result, these list items have a "Created By" value that reflects the service account's name.
+
+While this is acceptable in some instances, there are cases where I need a specific individual to appear as the author of the item. For example, when a Microsoft Form triggers my flow, I may want the list item to reflect the form responder as the list item author.
+
+This Power Automate flow updates the “Created By” field in Microsoft Lists, replacing the default account with a specified user based on their email address, using an HTTP request to SharePoint.
+
+## Help
+
+We do not support samples, but this community is always willing to help, and we want to improve these samples. We use GitHub to track issues, which makes it easy for  community members to volunteer their time and help resolve issues.
+
+If you encounter any issues while using this sample, you can [create a new issue](https://github.com/pnp/powerapps-samples/issues/new?assignees=&labels=Needs%3A+Triage+%3Amag%3A%2Ctype%3Abug-suspected&template=bug-report.yml&sample=Sharepoint%20-%20List%20-%20Update%20Created%20By&authors=@Glynnryan&title=Sharepoint%20-%20List%20-%20Update%20Created%20By%20-%20).
+
+For questions regarding this sample, [create a new question](https://github.com/pnp/powerapps-samples/issues/new?assignees=&labels=Needs%3A+Triage+%3Amag%3A%2Ctype%3Abug-suspected&template=question.yml&sample=Sharepoint%20-%20List%20-%20Update%20Created%20By&authors=@Glynnryan&title=Sharepoint%20-%20List%20-%20Update%20Created%20By%20-%20).
+
+Finally, if you have an idea for improvement, [make a suggestion](https://github.com/pnp/powerapps-samples/issues/new?assignees=&labels=Needs%3A+Triage+%3Amag%3A%2Ctype%3Abug-suspected&template=suggestion.yml&sample=Sharepoint%20-%20List%20-%20Update%20Created%20By&authors=@Glynnryan&title=Sharepoint%20-%20List%20-%20Update%20Created%20By%20-%20).
+
+## Disclaimer
+
+**THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
+
+## Post Script
+
+I stumbled onto a Microsoft Community post titled "[Update 'Created By' and 'Modified By' fields.](https://techcommunity.microsoft.com/t5/power-apps-and-power-automate-in/update-created-by-and-modified-by-fields/m-p/3672675/highlight/true#M6072)", with an answer by [Rob Elliott](https://techcommunity.microsoft.com/t5/user/viewprofilepage/user-id/174092#profile) which gave me the idea and framework for my solution.
+
+### Acknowledgements
+- [Rob Elliott](https://techcommunity.microsoft.com/t5/user/viewprofilepage/user-id/174092#profile)
+
+<img src="https://m365-visitor-stats.azurewebsites.net/powerplatform-samples/samples/Sharepoint%20-%20List%20-%20Update%20Created%20By"  aria-hidden="true" />
