@@ -27,6 +27,7 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 |  Text  |    List Name     |          Name of the list to update          |
 | Number |     List ID      |            List item ID to update            |
 |  Text  | Created By Email | Email address of the person to set as Author |
+|  Text  |   Site Address   |            Site address of the list          |
 
 6. Add a **Send an HTTP request to SharePoint** action.
 > [!TIP] 
@@ -35,9 +36,9 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 7. Configure the action as follows:
 
 ### Site Address
-Select or enter the relevant SharePoint site address.
+Select the **Site Address** dynamic content created in step 5, or enter the relevant SharePoint site address.
 > [!TIP] 
-> If you want this to work dynamically across multiple SharePoint sites, add a Text input to your trigger with a descriptive name, like "Site Address", and use that input when running the flow.
+> If you want this automation to work dynamically across multiple SharePoint sites, add the **Site Address** at step 5. Alternatively, you can set this as a fixed value if your use case means the SharePoint site will not change.
 
 ### Method
 Post
