@@ -9,7 +9,8 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 
 ![Solution Overview](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Overview.jpg?raw=true)
 > [!NOTE] 
-> My solution uses a flow created within a Solution in Power Automate. You can still achieve the end goal by following the steps below in a dedicated flow. However, if you're not using solutions, I would recommend starting to do so, as there are several benefits, such as running a child flow.  
+> My solution uses a flow created within a Solution in Power Automate. You can still achieve the end goal by following the steps below in a dedicated flow. However, if you're not using solutions, I would recommend starting to do so, as there are several benefits, such as running a child flow.
+> [!TIP]
 > For more information on Solutions, you can click [here](https://learn.microsoft.com/en-us/power-automate/overview-solution-flows).
 
 ## Steps
@@ -46,15 +47,15 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 
 ![Step 7](https://github.com/Glynnryan/Power-Platform/blob/main/Power%20Autoamte/Update%20Created%20By%20(Microsoft%20List)/Step%207.jpg?raw=true)
 
-### Site Address
+**Site Address**
 Select the **Site Address** dynamic content created in step 5, or enter the relevant SharePoint site address.
 > [!TIP] 
 > If you want this automation to work dynamically across multiple SharePoint sites, add the **Site Address** at step 5. Alternatively, you can set this as a fixed value if your use case means the SharePoint site will not change.
 
-### Method
+**Method**
 Post
 
-### Uri
+**Uri**
 
 ``` HTML
 _api/web/lists/getbytitle('@{triggerBody()?'text'}')/items('@{triggerBody()?'number'}')/validateUpdateListItem
@@ -62,7 +63,7 @@ _api/web/lists/getbytitle('@{triggerBody()?'text'}')/items('@{triggerBody()?'num
 > [!NOTE]
 > If you've followed the exact sequence in step 5, you can use the provided Uri without modification. Otherwise, adjust as needed.
 
-### Body
+**Body**
 
 ``` JSON
 {
