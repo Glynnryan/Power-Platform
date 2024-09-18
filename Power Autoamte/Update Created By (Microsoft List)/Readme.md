@@ -14,11 +14,6 @@ This Power Automate flow updates the “Created By” field of a Microsoft List 
 
 ![Premium License](https://img.shields.io/badge/Premium%20License-Not%20Required-red.svg "Premium license not required") ![Experimental Features](https://img.shields.io/badge/Experimental%20Features-No-red.svg "Does not rely on experimental features")
 
-## Authors
-
-| Solution                              | Author                                        |
-| ------------------------------------- | --------------------------------------------- |
-| Sharepoint - List - Update Created By | [Glynn Pearson](https://github.com/Glynnryan) |
 
 ## Version history
 
@@ -159,19 +154,6 @@ While this is acceptable in some instances, there are cases where I need a speci
 
 This Power Automate flow updates the “Created By” field in Microsoft Lists, replacing the default account with a specified user based on their email address, using an HTTP request to SharePoint.
 
-## Help
-
-We do not support samples, but this community is always willing to help, and we want to improve these samples. We use GitHub to track issues, which makes it easy for  community members to volunteer their time and help resolve issues.
-
-If you encounter any issues while using this sample, you can [create a new issue](https://github.com/pnp/powerapps-samples/issues/new?assignees=&labels=Needs%3A+Triage+%3Amag%3A%2Ctype%3Abug-suspected&template=bug-report.yml&sample=Sharepoint%20-%20List%20-%20Update%20Created%20By&authors=@Glynnryan&title=Sharepoint%20-%20List%20-%20Update%20Created%20By%20-%20).
-
-For questions regarding this sample, [create a new question](https://github.com/pnp/powerapps-samples/issues/new?assignees=&labels=Needs%3A+Triage+%3Amag%3A%2Ctype%3Abug-suspected&template=question.yml&sample=Sharepoint%20-%20List%20-%20Update%20Created%20By&authors=@Glynnryan&title=Sharepoint%20-%20List%20-%20Update%20Created%20By%20-%20).
-
-Finally, if you have an idea for improvement, [make a suggestion](https://github.com/pnp/powerapps-samples/issues/new?assignees=&labels=Needs%3A+Triage+%3Amag%3A%2Ctype%3Abug-suspected&template=suggestion.yml&sample=Sharepoint%20-%20List%20-%20Update%20Created%20By&authors=@Glynnryan&title=Sharepoint%20-%20List%20-%20Update%20Created%20By%20-%20).
-
-## Disclaimer
-
-**THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
 
 ## Post Script
 
@@ -181,4 +163,6 @@ I stumbled onto a Microsoft Community post titled "[Update 'Created By' and 'Mod
 
 - [Rob Elliott](https://techcommunity.microsoft.com/t5/user/viewprofilepage/user-id/174092#profile)
 
-<img src="https://m365-visitor-stats.azurewebsites.net/powerplatform-samples/samples/Sharepoint%20-%20List%20-%20Update%20Created%20By"  aria-hidden="true" />
+## Disclaimer
+
+**THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
