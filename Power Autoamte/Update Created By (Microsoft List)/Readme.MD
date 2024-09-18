@@ -23,7 +23,7 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 5. Select **Manually trigger a flow** and add the following inputs:
 
 |  Type  |       Name       |                 Description                  |
-| :----: | :--------------: | :------------------------------------------: |
+| ------ | ---------------- | -------------------------------------------- |
 |  Text  |    List Name     |          Name of the list to update          |
 | Number |     List ID      |            List item ID to update            |
 |  Text  | Created By Email | Email address of the person to set as Author |
