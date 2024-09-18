@@ -33,17 +33,24 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 > You can search for "HTTP" in the search box to find this action more quickly.
 
 7. Configure the action as follows:
-### Site Address <sup>1</sup>
-Select or enter the relevant SharePoint site address
+
+### Site Address
+Select or enter the relevant SharePoint site address.
+> [!TIP] 
+> If you want this to work dynamically across multiple SharePoint sites, add a Text input to your trigger with a descriptive name, like "Site Address", and use that input when running the flow.
+
 ### Method
 Post
-### Uri <sup>2</sup>
+
+### Uri
 
 ``` HTML
 _api/web/lists/getbytitle('@{triggerBody()?'text'}')/items('@{triggerBody()?'number'}')/validateUpdateListItem
 ```
+> [!NOTE]
+> If you've followed the exact sequence in step 5, you can use the provided Uri without modification. Otherwise, adjust as needed.
 
-### Body <sup>2</sup>
+### Body
 
 ``` JSON
 {
@@ -55,12 +62,8 @@ _api/web/lists/getbytitle('@{triggerBody()?'text'}')/items('@{triggerBody()?'num
 	]
 }
 ```
-
-> [!TIP] 
-> <sup>1</sup> If you want this to work dynamically across multiple SharePoint sites, add a Text input to your trigger with a descriptive name, like "Site Address", and use that input when running the flow.
-
 > [!NOTE]
-> <sup>2</sup> If you've followed the exact sequence in step 5, you should be able to use the provided values without modification. Otherwise, adjust them as needed.
+> If you've followed the exact sequence in step 5, you can use the provided JSON without modification. Otherwise, adjust as needed.
 
 8. Add a **Respond to a Power App or flow** action.
 > [!TIP]
