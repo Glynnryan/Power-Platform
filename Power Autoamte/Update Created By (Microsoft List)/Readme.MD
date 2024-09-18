@@ -33,13 +33,20 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 > You can search for "HTTP" in the search box to find this action more quickly.
 
 7. Configure the action as follows:
+### Site Address <sup>1</sup>
+Select or enter the relevant SharePoint site address
+### Method
+Post
+### Uri <sup>2</sup>
 
-| Description                  | Value                                                                                                                                                                          |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Site Address<sup>**1**</sup> | Select or enter the relevant SharePoint site address                                                                                                                           |
-| Method                       | Post                                                                                                                                                                           |
-| Uri<sup>**2**</sup>          | `_api/web/lists/getbytitle('@{triggerBody()?['text']}')/items('@{triggerBody()?['number']}')/validateUpdateListItem`                                                           |
-| Body<sup>**2**</sup>         | ```json{
+``` HTML
+_api/web/lists/getbytitle('@{triggerBody()?'text'}')/items('@{triggerBody()?'number'}')/validateUpdateListItem
+```
+
+### Body <sup>2</sup>
+
+``` JSON
+{
 	"formValues":[
 		{
 			"FieldName": "Author",
@@ -47,8 +54,7 @@ After some thought, I did a bit of [Google searching](https://letmegooglethat.co
 		}
 	]
 }
-``` |
-|                              |                                                                                                                                                                                |
+```
 
 > [!TIP] 
 > <sup>1</sup> If you want this to work dynamically across multiple SharePoint sites, add a Text input to your trigger with a descriptive name, like "Site Address", and use that input when running the flow.
